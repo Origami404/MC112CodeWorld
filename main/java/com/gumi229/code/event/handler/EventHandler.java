@@ -3,6 +3,7 @@ package com.gumi229.code.event.handler;
 import com.gumi229.code.object.entity.EntityShoujo;
 import com.gumi229.code.object.entity.EntityShoujoJava;
 import com.gumi229.code.object.item.ShoujoSword;
+import com.gumi229.code.until.Global;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,24 @@ public class EventHandler {
 	public void addShoujoSwordLevel(LivingDeathEvent event) {
 		if (event.getEntity() instanceof EntityShoujo && event.getSource() instanceof EntityDamageSource) {
 			if (((EntityDamageSource) event.getSource()).getTrueSource() instanceof EntityPlayer) {
+				EntityPlayer player = ((EntityPlayer) event.getSource().getTrueSource());
+				if (player.getHeldItemMainhand().getItem() instanceof ShoujoSword) {
+					((ShoujoSword) player.getHeldItemMainhand().getItem()).addLevel(5);
+				}
+			}
+		}
 
+		if (event.getSource() instanceof EntityDamageSource) {
+			if (((EntityDamageSource) event.getSource()).getTrueSource() instanceof EntityPlayer) {
+				EntityPlayer player = ((EntityPlayer) event.getSource().getTrueSource());
+				if (player.getHeldItemMainhand().getItem() instanceof ShoujoSword) {
+					ShoujoSword sword = (ShoujoSword) player.getHeldItemMainhand().getItem();
+					if (event.getEntity() instanceof EntityShoujo) {
+						sword.addLevel(Global.rand(2, 5));
+					} else {
+						sword.addLevel(Global.rand(0, 3));
+					}
+				}
 			}
 		}
 	}

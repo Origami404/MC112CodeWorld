@@ -15,4 +15,8 @@ public class ShoujoSword extends ItemTool {
 		this.type = pp;
 	}
 
+	public void addLevel(int i) {
+		this.level += i;
+	}
+
 }
