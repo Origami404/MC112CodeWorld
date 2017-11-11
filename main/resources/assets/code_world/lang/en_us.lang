@@ -1,0 +1,16 @@
+item.dataSword.name=Data Sword
+item.dataIngot.name=Data Debris
+tile.dataOre.name=Data Debris Block
+itemGroup.code_world=Coding == Generating Bug
+
+
+
+item.codeIngot.name=Code Debris
+item.codeSword.name=Code Sword
+item.codePickaxe.name=Code Pickaxe
+item.codeAxe.name=Code Axe
+item.codeHoe.name=Code Hoe
+item.codeShovel.name=Code Shovel
+tile.codeOre.name=Code Debris Ore
+
+entiy.code_world.JavaShoujo.name=JAVA ShouJo

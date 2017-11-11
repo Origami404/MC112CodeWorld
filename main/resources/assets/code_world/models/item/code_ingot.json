@@ -1,0 +1,7 @@
+
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "code_world:items/code_ingot"
+    }
+}
