@@ -3,6 +3,7 @@ package com.gumi229.code.object.group;
 import java.util.HashSet;
 
 import com.gumi229.code.CodeWorld;
+import com.gumi229.code.object.item.ShapedRecipeJSONWritter;
 import com.gumi229.code.until.Global;
 import com.gumi229.code.until.GroupInfo;
 
@@ -18,11 +19,8 @@ public class Group {
 	public final Block ore, cube;
 	public final String groupName;
 	public final GroupInfo groupInfo;
+	private final String stick = "minecraft:stick";
 
-	/*
-	 * public final String[] itemName = { "ingot", "sword", "shovel", "pickaxe",
-	 * "axe", "hoe" }; public final String[] blockName = { "ore", "cube" };
-	 */
 	public String getRegistryName(String name) {
 		return (new StringBuilder()).append(groupName).append("_").append(name).toString();
 	}
@@ -52,12 +50,19 @@ public class Group {
 
 	}
 
+	private void wirteSR(String name, String line1, String line2) {
+		ShapedRecipeJSONWritter.write(getAllRegistryName(name), line1, line2, " * ", "#", getAllRegistryName("ingot"),
+				"*", "minecraft:stick");
+	}
+
 	public class Cube extends Block {
 		public Cube() {
 			super(Material.ROCK);
 			this.setSoundType(SoundType.METAL);
 			this.setHardness(groupInfo.oreHarfness);
 			this.setHarvestLevel("pickaxe", groupInfo.harvestLevel - 1);
+			ShapedRecipeJSONWritter.write(getAllRegistryName("cube"), "###", "###", "###", "#",
+					getAllRegistryName("ingot"));
 			Global.setTab(this);
 		}
 	}
@@ -93,6 +98,7 @@ public class Group {
 	public class Sword extends ItemTool {
 		public Sword() {
 			super(groupInfo.toolAttack, groupInfo.toolAttackSpeed, groupInfo.toolMaterial, new HashSet());
+			wirteSR("sword", " # ", " # ");
 			Global.setTab(this);
 		}
 	}
@@ -101,6 +107,7 @@ public class Group {
 		public Pickaxe() {
 			super(groupInfo.toolAttack, groupInfo.toolAttackSpeed, groupInfo.toolMaterial, new HashSet());
 			this.setHarvestLevel("pickaxe", groupInfo.harvestLevel);
+			wirteSR("pickaxe", "###", " * ");
 			Global.setTab(this);
 		}
 	}
@@ -109,6 +116,7 @@ public class Group {
 		public Axe() {
 			super(groupInfo.toolAttack, groupInfo.toolAttackSpeed, groupInfo.toolMaterial, new HashSet());
 			this.setHarvestLevel("axe", groupInfo.harvestLevel);
+			wirteSR("axe", "## ", "#  ");
 			Global.setTab(this);
 		}
 	}
@@ -117,6 +125,7 @@ public class Group {
 		public Shovel() {
 			super(groupInfo.toolAttack, groupInfo.toolAttackSpeed, groupInfo.toolMaterial, new HashSet());
 			this.setHarvestLevel("shovel", groupInfo.harvestLevel);
+			wirteSR("shovel", " # ", " * ");
 			Global.setTab(this);
 		}
 	}
@@ -124,6 +133,7 @@ public class Group {
 	public class Hoe extends ItemHoe {
 		public Hoe() {
 			super(groupInfo.toolMaterial);
+			wirteSR("hoe", "## ", " * ");
 			Global.setTab(this);
 		}
 	}

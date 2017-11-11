@@ -16,4 +16,4 @@
   "result": {
     "item": "code_world:data_sword"
   }
-}
+}{"result":{"item":"code_world:data_sword"},"pattern":[" # "," # "," * "],"type":"forge:ore_shaped","key":{"#":{"item":"code_world:data_ingot"},"*":{"item":"minecraft:stick"}}}
