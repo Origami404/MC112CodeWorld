@@ -26,15 +26,6 @@ public class EventHandler {
 
 	@SubscribeEvent
 	public void addShoujoSwordLevel(LivingDeathEvent event) {
-		if (event.getEntity() instanceof EntityShoujo && event.getSource() instanceof EntityDamageSource) {
-			if (((EntityDamageSource) event.getSource()).getTrueSource() instanceof EntityPlayer) {
-				EntityPlayer player = ((EntityPlayer) event.getSource().getTrueSource());
-				if (player.getHeldItemMainhand().getItem() instanceof ShoujoSword) {
-					((ShoujoSword) player.getHeldItemMainhand().getItem()).addLevel(5);
-				}
-			}
-		}
-
 		if (event.getSource() instanceof EntityDamageSource) {
 			if (((EntityDamageSource) event.getSource()).getTrueSource() instanceof EntityPlayer) {
 				EntityPlayer player = ((EntityPlayer) event.getSource().getTrueSource());
