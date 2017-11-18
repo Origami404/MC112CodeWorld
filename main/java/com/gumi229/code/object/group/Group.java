@@ -3,15 +3,9 @@ package com.gumi229.code.object.group;
 import java.util.HashSet;
 
 import com.gumi229.code.CodeWorld;
-<<<<<<< HEAD
 import com.gumi229.code.until.Global;
 import com.gumi229.code.until.GroupInfo;
 import com.gumi229.code.until.ShapedRecipeJSONWritter;
-=======
-import com.gumi229.code.object.item.ShapedRecipeJSONWritter;
-import com.gumi229.code.until.Global;
-import com.gumi229.code.until.GroupInfo;
->>>>>>> 37db067039eb28b02a25da4efc0673323738a6db
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -77,18 +71,20 @@ public class Group {
 		public Ore() {
 			super(Material.ROCK);
 			this.setSoundType(SoundType.STONE);
-			// 硬度，50为黑曜石
+			// 纭害锛�50涓洪粦鏇滅煶
 			this.setHardness(groupInfo.oreHarfness);
-			// 开采等级，镐，铁或以上
+			// 寮�閲囩瓑绾э紝闀愶紝閾佹垨浠ヤ笂
 			this.setHarvestLevel("pickaxe", groupInfo.harvestLevel - 1);
 			this.setLightLevel(0.7f);
 			/*
-			 * setHardness是设置砖块的硬度,这个硬度是相对于徒手而言的,泥土是0.5,石头是1.5,大部分矿石是3.0.
-			 * setResistance是设置对爆炸的抗性,石头是10.0.
-			 * setLightLevel是设置发光亮度,范围是0.0~1.0,南瓜灯,萤石和岩浆是1.0,通往下界的传送门是0.75.采集中的红石是0.625.
-			 * setHarvestLevel是设置开采砖块时需要使用的工具,可以是"pickaxe"(镐),
-			 * "shovel"(铲子)或"axe"(斧头).后面的数值为工具材质要求,-1(默认值)为可以直接手撕,0是木质和金质,1是石质,2是铁质,3是钻石质.
-			 * setSoundType是设置踩在上面的脚步声.默认值就是SoundType.STONE(石头地的声音.) 这里是为了演示这个方法的用途.
+			 * setHardness鏄缃爾鍧楃殑纭害,杩欎釜纭害鏄浉瀵逛簬寰掓墜鑰岃█鐨�,娉ュ湡鏄�0.5,鐭冲ご鏄�1.5,澶ч儴鍒嗙熆鐭虫槸3.0.
+			 * setResistance鏄缃鐖嗙偢鐨勬姉鎬�,鐭冲ご鏄�10.0.
+			 * setLightLevel鏄缃彂鍏変寒搴�,鑼冨洿鏄�0.0~1.0,鍗楃摐鐏�,钀ょ煶鍜屽博娴嗘槸1.0,閫氬線涓嬬晫鐨勪紶閫侀棬鏄�0.75.
+			 * 閲囬泦涓殑绾㈢煶鏄�0.625. setHarvestLevel鏄缃紑閲囩爾鍧楁椂闇�瑕佷娇鐢ㄧ殑宸ュ叿,鍙互鏄�"pickaxe"(闀�),
+			 * "shovel"(閾插瓙)鎴�"axe"(鏂уご).鍚庨潰鐨勬暟鍊间负宸ュ叿鏉愯川瑕佹眰,-1(榛樿鍊�)涓哄彲浠ョ洿鎺ユ墜鎾�,0鏄湪璐ㄥ拰閲戣川,
+			 * 1鏄煶璐�,2鏄搧璐�,3鏄捇鐭宠川.
+			 * setSoundType鏄缃俯鍦ㄤ笂闈㈢殑鑴氭澹�.榛樿鍊煎氨鏄疭oundType.STONE(鐭冲ご鍦扮殑澹伴煶.)
+			 * 杩欓噷鏄负浜嗘紨绀鸿繖涓柟娉曠殑鐢ㄩ��.
 			 */
 			Global.setTab(this);
 		}
