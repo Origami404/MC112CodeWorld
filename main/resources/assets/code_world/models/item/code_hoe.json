@@ -1,0 +1,7 @@
+
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "code_world:items/code_hoe"
+    }
+}

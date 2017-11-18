@@ -1,0 +1,19 @@
+itemGroup.code_world=编程 == 写bug
+
+item.dataSword.name=元晶剑
+item.dataPickaxe.name=元晶镐
+item.dataAxe.name=元晶斧
+item.dataHoe.name=元晶锄
+item.dataShovel.name=元晶铲
+item.dataIngot.name=元晶
+tile.dataOre.name=元晶矿
+
+item.codeIngot.name=秩晶
+item.codeSword.name=秩晶剑
+item.codePickaxe.name=秩晶镐
+item.codeAxe.name=秩晶斧
+item.codeHoe.name=秩晶锄
+item.codeShovel.name=秩晶铲
+tile.codeOre.name=秩晶矿
+
+entiy.code_world.JavaShoujo.name=马猴JAVA烧酒

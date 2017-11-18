@@ -1,0 +1,16 @@
+[
+{
+  "modid": "code_world",
+  "name": "Code World",
+  "description": "nothing",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ExampleDude"],
+  "credits": "gumi229",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
