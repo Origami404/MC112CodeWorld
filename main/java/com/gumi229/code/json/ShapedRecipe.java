@@ -19,24 +19,6 @@ public class ShapedRecipe {
 
 	}
 
-	public static class Key {
-
-		private HashMap<String, ItemSign> map;
-
-		public Key() {
-			map = new HashMap<>();
-		}
-
-		public HashMap<String, ItemSign> getMap() {
-			return map;
-		}
-
-		public void setMap(HashMap<String, ItemSign> map) {
-			this.map = map;
-		}
-
-	}
-
 	public static class Result {
 		private String item;
 
@@ -55,7 +37,7 @@ public class ShapedRecipe {
 
 	private final String type = "forge:ore_shaped";
 	private ArrayList<String> pattern = new ArrayList<>();
-	private Key key = new Key();
+	private HashMap<String, ItemSign> key = new HashMap<>();
 	private Result result;
 
 	public String getType() {
@@ -66,7 +48,7 @@ public class ShapedRecipe {
 		return pattern;
 	}
 
-	public Key getKey() {
+	public HashMap<String, ItemSign> getKey() {
 		return key;
 	}
 
@@ -79,7 +61,7 @@ public class ShapedRecipe {
 		pattern.add(line2);
 		pattern.add(line3);
 		for (int i = 0; i < sign.length; i += 2) {
-			key.getMap().put(sign[i], new ItemSign(sign[i + 1]));
+			key.put(sign[i], new ItemSign(sign[i + 1]));
 		}
 
 		this.result = new Result(result);

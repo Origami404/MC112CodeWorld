@@ -5,7 +5,7 @@ import java.util.HashSet;
 import com.gumi229.code.CodeWorld;
 import com.gumi229.code.until.Global;
 import com.gumi229.code.until.GroupInfo;
-import com.gumi229.code.until.ShapedRecipeJSONWritter;
+import com.gumi229.code.until.JSONWritter;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -51,7 +51,7 @@ public class Group {
 	}
 
 	private void wirteSR(String name, String line1, String line2) {
-		ShapedRecipeJSONWritter.write(getAllRegistryName(name), line1, line2, " * ", "#", getAllRegistryName("ingot"),
+		JSONWritter.writeShapedRecipe(getAllRegistryName(name), line1, line2, " * ", "#", getAllRegistryName("ingot"),
 				"*", "minecraft:stick");
 	}
 
@@ -61,7 +61,7 @@ public class Group {
 			this.setSoundType(SoundType.METAL);
 			this.setHardness(groupInfo.oreHarfness);
 			this.setHarvestLevel("pickaxe", groupInfo.harvestLevel - 1);
-			ShapedRecipeJSONWritter.write(getAllRegistryName("cube"), "###", "###", "###", "#",
+			JSONWritter.writeShapedRecipe(getAllRegistryName("cube"), "###", "###", "###", "#",
 					getAllRegistryName("ingot"));
 			Global.setTab(this);
 		}
