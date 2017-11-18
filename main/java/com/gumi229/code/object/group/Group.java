@@ -3,9 +3,15 @@ package com.gumi229.code.object.group;
 import java.util.HashSet;
 
 import com.gumi229.code.CodeWorld;
+<<<<<<< HEAD
 import com.gumi229.code.until.Global;
 import com.gumi229.code.until.GroupInfo;
 import com.gumi229.code.until.ShapedRecipeJSONWritter;
+=======
+import com.gumi229.code.object.item.ShapedRecipeJSONWritter;
+import com.gumi229.code.until.Global;
+import com.gumi229.code.until.GroupInfo;
+>>>>>>> 37db067039eb28b02a25da4efc0673323738a6db
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

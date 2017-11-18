@@ -22,10 +22,17 @@ public class EntityShoujoJava extends EntityShoujo {
 		super.onLivingUpdate();
 	}
 
+<<<<<<< HEAD
 	/*
 	 * @Override protected void dropFewItems(boolean wasRecentlyHit, int
 	 * lootingModifier) { super.dropFewItems(wasRecentlyHit, lootingModifier); }
 	 */
+=======
+	@Override
+	protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
+		super.dropFewItems(wasRecentlyHit, lootingModifier);
+	}
+>>>>>>> 37db067039eb28b02a25da4efc0673323738a6db
 
 	@Override
 	protected Item getDropItem() {
