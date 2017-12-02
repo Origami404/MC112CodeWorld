@@ -1,7 +1,7 @@
 package com.gumi229.code.init.common;
 
 
-import com.gumi229.code.envent.*;
+import com.gumi229.code.event.*;
 import com.gumi229.code.event.handler.*;
 import com.gumi229.code.loader.EntitiesLoader;
 import com.gumi229.code.loader.GroupLoader;

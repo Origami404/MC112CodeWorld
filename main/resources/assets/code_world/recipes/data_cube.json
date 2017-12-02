@@ -1,1 +1,22 @@
-{"type":"forge:ore_shaped","pattern":["###","###","###"],"key":{"#":{"item":"code_world:data_ingot"}},"result":{"item":"code_world:data_cube"}}
+{
+   "type":"forge:ore_shaped",
+   "pattern":
+   [
+      "###",
+      "###",
+      "###"
+   ],
+   "key":
+   {
+      "#":
+      {
+         "item":"code_world:data_ingot"
+      }
+
+   },
+   "result":
+   {
+      "item":"code_world:data_cube"
+   }
+
+}

@@ -11,20 +11,28 @@ import net.minecraft.item.Item;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EventHandler {
-	@SubscribeEvent
+	/*
+	 * WARNING: It will make MC throws exception:
+	 * 
+	 * [12:39:28] [pool-2-thread-1/WARN]: Couldn't look up profile properties for
+	 * com.mojang.authlib.GameProfile
+	 * 
+	 * com.mojang.authlib.exceptions.AuthenticationException: The client has sent
+	 * too many requests within a certain amount of time
+	 */
+	// @SubscribeEvent
 	public void onPlayerAttackingShoujoWithShoujoSword(CriticalHitEvent event) {
 		Item heldItem = event.getEntityPlayer().getHeldItemMainhand().getItem();
 		Entity target = event.getTarget();
 		if (heldItem instanceof ShoujoSword && target instanceof EntityShoujoJava) {
-			float multiple = ((ShoujoSword) heldItem).type.getMultiple(((EntityShoujo) target).type);
+			float multiple = ((ShoujoSword) heldItem).type.getMultiple(((EntityShoujo) target).getType());
 			event.setDamageModifier(event.getDamageModifier() * multiple);
 		}
 	}
 
-	@SubscribeEvent
+	// @SubscribeEvent
 	public void addShoujoSwordLevel(LivingDeathEvent event) {
 		if (event.getSource() instanceof EntityDamageSource) {
 			if (((EntityDamageSource) event.getSource()).getTrueSource() instanceof EntityPlayer) {
@@ -37,6 +45,21 @@ public class EventHandler {
 						sword.addLevel(Global.rand(0, 3));
 					}
 				}
+			}
+		}
+	}
+
+	// @SubscribeEvent
+	public void logForKilling(LivingDeathEvent event) {
+		if (event.getSource() instanceof EntityDamageSource) {
+			if (((EntityDamageSource) event.getSource()).getTrueSource() instanceof EntityPlayer) {
+				EntityPlayer player = ((EntityPlayer) event.getSource().getTrueSource());
+				ShoujoSword sword = (ShoujoSword) player.getHeldItemMainhand().getItem();
+
+				Global.logger.info("!!!!!!!!!!!!!!!Player kill!!!!!!!!!");
+				Global.logger.info("By {} , target is {}", sword.getClass().getName(),
+						event.getEntity().getClass().getName());
+
 			}
 		}
 	}

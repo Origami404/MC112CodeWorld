@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "code_world:blocks/data_ore"
-    }
+   "parent":"code_world:block/data_ore"
 }

@@ -1,5 +1,11 @@
 {
-    "variants": {
-        "normal": { "model": "code_world:data_ore" }
-    }
+   "variants":
+   {
+      "normal":
+      {
+         "model":"code_world:data_ore"
+      }
+
+   }
+
 }

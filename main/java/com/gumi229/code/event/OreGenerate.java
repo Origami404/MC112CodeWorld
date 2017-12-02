@@ -1,5 +1,5 @@
 
-package com.gumi229.code.envent;
+package com.gumi229.code.event;
 
 import java.util.Random;
 

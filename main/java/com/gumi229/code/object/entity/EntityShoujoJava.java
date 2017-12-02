@@ -22,15 +22,6 @@ public class EntityShoujoJava extends EntityShoujo {
 		super.onLivingUpdate();
 	}
 
-	/*
-	 * @Override protected void dropFewItems(boolean wasRecentlyHit, int
-	 * lootingModifier) { super.dropFewItems(wasRecentlyHit, lootingModifier); }
-	 */
-	@Override
-	protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
-		super.dropFewItems(wasRecentlyHit, lootingModifier);
-	}
-
 	@Override
 	protected Item getDropItem() {
 		return GroupCode.instance().ingot;
@@ -48,7 +39,6 @@ public class EntityShoujoJava extends EntityShoujo {
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-		// this.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(0.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
 	}
 

@@ -1,1 +1,26 @@
-{"type":"forge:ore_shaped","pattern":[" # "," * "," * "],"key":{"#":{"item":"code_world:code_ingot"},"*":{"item":"minecraft:stick"}},"result":{"item":"code_world:code_shovel"}}
+{
+   "type":"forge:ore_shaped",
+   "pattern":
+   [
+      " # ",
+      " * ",
+      " * "
+   ],
+   "key":
+   {
+      "#":
+      {
+         "item":"code_world:code_ingot"
+      },
+      "*":
+      {
+         "item":"minecraft:stick"
+      }
+
+   },
+   "result":
+   {
+      "item":"code_world:code_shovel"
+   }
+
+}

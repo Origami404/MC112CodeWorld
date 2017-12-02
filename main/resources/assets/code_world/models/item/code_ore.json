@@ -1,7 +1,3 @@
-
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "code_world:blocks/code_ore"
-    }
+   "parent":"code_world:block/code_ore"
 }

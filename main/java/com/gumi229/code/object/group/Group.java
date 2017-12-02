@@ -3,9 +3,16 @@ package com.gumi229.code.object.group;
 import java.util.HashSet;
 
 import com.gumi229.code.CodeWorld;
+import com.gumi229.code.exception.CannotWriteJSONFile;
+import com.gumi229.code.json.object.BlockItemModel;
+import com.gumi229.code.json.object.BlockModel;
+import com.gumi229.code.json.object.Blockstates;
+import com.gumi229.code.json.object.ItemModel;
+import com.gumi229.code.json.object.JSONObject;
+import com.gumi229.code.json.object.ShapedRecipe;
+import com.gumi229.code.json.writer.JSONWriter;
 import com.gumi229.code.until.Global;
 import com.gumi229.code.until.GroupInfo;
-import com.gumi229.code.until.JSONWritter;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -19,21 +26,7 @@ public class Group {
 	public final Block ore, cube;
 	public final String groupName;
 	public final GroupInfo groupInfo;
-	private final String stick = "minecraft:stick";
-
-	public String getRegistryName(String name) {
-		return (new StringBuilder()).append(groupName).append("_").append(name).toString();
-	}
-
-	public String getUnlocalizedName(String name) {
-		return (new StringBuilder()).append(groupName).append(Character.toUpperCase(name.charAt(0)))
-				.append(name.substring(1)).toString();
-	}
-
-	public String getAllRegistryName(String name) {
-		return (new StringBuilder()).append(CodeWorld.MODID).append(":").append(this.getRegistryName(name)).toString();
-
-	}
+	static private final String stick = "minecraft:stick";
 
 	public Group(String groupName, GroupInfo groupInfo) {
 		this.groupName = groupName;
@@ -50,19 +43,86 @@ public class Group {
 
 	}
 
-	private void wirteSR(String name, String line1, String line2) {
-		JSONWritter.writeShapedRecipe(getAllRegistryName(name), line1, line2, " * ", "#", getAllRegistryName("ingot"),
-				"*", "minecraft:stick");
+	/*
+	 * Some method to get kinds of name
+	 */
+
+	// like "code_sword"
+	public String getRegistryName(String name) {
+		return (new StringBuilder()).append(groupName).append("_").append(name).toString();
 	}
 
+	// like "codeSword"
+	public String getUnlocalizedName(String name) {
+		return (new StringBuilder()).append(groupName).append(Character.toUpperCase(name.charAt(0)))
+				.append(name.substring(1)).toString();
+	}
+
+	// like "code_world:code_sword"
+	public String getAllRegistryName(String name) {
+		return (new StringBuilder()).append(CodeWorld.MODID).append(":").append(this.getRegistryName(name)).toString();
+
+	}
+
+	/*
+	 * All of the methods likes writeXXX, the arg called "name" should like
+	 * "pickaxe" and "axe"
+	 */
+	private void writeRecipe(String name, String line1, String line2) {
+		JSONObject recipe = (new ShapedRecipe.Builder()).RecipePattern(line1, line2, " * ")
+				.RecipeKey("#", getAllRegistryName("ingot"), "*", "minecraft:stick")
+				.RecipeResult(getAllRegistryName(name)).toJSONObject();
+		try {
+			JSONWriter.ShapedRecipe.write(recipe);
+		} catch (CannotWriteJSONFile e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void writeCubeRecipe() {
+		JSONObject recipe = (new ShapedRecipe.Builder()).RecipePattern("###", "###", "###")
+				.RecipeKey("#", getAllRegistryName("ingot")).RecipeResult(getAllRegistryName("cube")).toJSONObject();
+		try {
+			JSONWriter.ShapedRecipe.write(recipe);
+		} catch (CannotWriteJSONFile e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void writeItemModel(String name) {
+		JSONObject model = new ItemModel("item/generated", getRegistryName(name));
+		try {
+			JSONWriter.ItemModel.write(model);
+		} catch (CannotWriteJSONFile e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void writeBlockModel(String name) {
+		JSONObject itemModel = new BlockItemModel(getRegistryName(name));
+		JSONObject blockModel = new BlockModel(getRegistryName(name));
+		JSONObject blockstates = new Blockstates(getRegistryName(name));
+		try {
+			JSONWriter.ItemModel.write(itemModel);
+			JSONWriter.BlockModel.write(blockModel);
+			JSONWriter.Blockstates.write(blockstates);
+		} catch (CannotWriteJSONFile e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * Some class for item
+	 */
 	public class Cube extends Block {
 		public Cube() {
 			super(Material.ROCK);
 			this.setSoundType(SoundType.METAL);
 			this.setHardness(groupInfo.oreHarfness);
 			this.setHarvestLevel("pickaxe", groupInfo.harvestLevel - 1);
-			JSONWritter.writeShapedRecipe(getAllRegistryName("cube"), "###", "###", "###", "#",
-					getAllRegistryName("ingot"));
+
+			writeCubeRecipe();
+			writeBlockModel("cube");
 			Global.setTab(this);
 		}
 	}
@@ -71,21 +131,10 @@ public class Group {
 		public Ore() {
 			super(Material.ROCK);
 			this.setSoundType(SoundType.STONE);
-			// 纭害锛�50涓洪粦鏇滅煶
 			this.setHardness(groupInfo.oreHarfness);
-			// 寮�閲囩瓑绾э紝闀愶紝閾佹垨浠ヤ笂
 			this.setHarvestLevel("pickaxe", groupInfo.harvestLevel - 1);
 			this.setLightLevel(0.7f);
-			/*
-			 * setHardness鏄缃爾鍧楃殑纭害,杩欎釜纭害鏄浉瀵逛簬寰掓墜鑰岃█鐨�,娉ュ湡鏄�0.5,鐭冲ご鏄�1.5,澶ч儴鍒嗙熆鐭虫槸3.0.
-			 * setResistance鏄缃鐖嗙偢鐨勬姉鎬�,鐭冲ご鏄�10.0.
-			 * setLightLevel鏄缃彂鍏変寒搴�,鑼冨洿鏄�0.0~1.0,鍗楃摐鐏�,钀ょ煶鍜屽博娴嗘槸1.0,閫氬線涓嬬晫鐨勪紶閫侀棬鏄�0.75.
-			 * 閲囬泦涓殑绾㈢煶鏄�0.625. setHarvestLevel鏄缃紑閲囩爾鍧楁椂闇�瑕佷娇鐢ㄧ殑宸ュ叿,鍙互鏄�"pickaxe"(闀�),
-			 * "shovel"(閾插瓙)鎴�"axe"(鏂уご).鍚庨潰鐨勬暟鍊间负宸ュ叿鏉愯川瑕佹眰,-1(榛樿鍊�)涓哄彲浠ョ洿鎺ユ墜鎾�,0鏄湪璐ㄥ拰閲戣川,
-			 * 1鏄煶璐�,2鏄搧璐�,3鏄捇鐭宠川.
-			 * setSoundType鏄缃俯鍦ㄤ笂闈㈢殑鑴氭澹�.榛樿鍊煎氨鏄疭oundType.STONE(鐭冲ご鍦扮殑澹伴煶.)
-			 * 杩欓噷鏄负浜嗘紨绀鸿繖涓柟娉曠殑鐢ㄩ��.
-			 */
+			writeBlockModel("ore");
 			Global.setTab(this);
 		}
 	}
@@ -93,6 +142,7 @@ public class Group {
 	public class Ingot extends Item {
 		public Ingot() {
 			super();
+			writeItemModel("ingot");
 			Global.setTab(this);
 		}
 	}
@@ -100,7 +150,8 @@ public class Group {
 	public class Sword extends ItemTool {
 		public Sword() {
 			super(groupInfo.toolAttack, groupInfo.toolAttackSpeed, groupInfo.toolMaterial, new HashSet());
-			wirteSR("sword", " # ", " # ");
+			writeRecipe("sword", " # ", " # ");
+			writeItemModel("sword");
 			Global.setTab(this);
 		}
 	}
@@ -109,7 +160,8 @@ public class Group {
 		public Pickaxe() {
 			super(groupInfo.toolAttack, groupInfo.toolAttackSpeed, groupInfo.toolMaterial, new HashSet());
 			this.setHarvestLevel("pickaxe", groupInfo.harvestLevel);
-			wirteSR("pickaxe", "###", " * ");
+			writeRecipe("pickaxe", "###", " * ");
+			writeItemModel("pickaxe");
 			Global.setTab(this);
 		}
 	}
@@ -118,7 +170,8 @@ public class Group {
 		public Axe() {
 			super(groupInfo.toolAttack, groupInfo.toolAttackSpeed, groupInfo.toolMaterial, new HashSet());
 			this.setHarvestLevel("axe", groupInfo.harvestLevel);
-			wirteSR("axe", "## ", "#  ");
+			writeRecipe("axe", "## ", "#* ");
+			writeItemModel("axe");
 			Global.setTab(this);
 		}
 	}
@@ -127,7 +180,8 @@ public class Group {
 		public Shovel() {
 			super(groupInfo.toolAttack, groupInfo.toolAttackSpeed, groupInfo.toolMaterial, new HashSet());
 			this.setHarvestLevel("shovel", groupInfo.harvestLevel);
-			wirteSR("shovel", " # ", " * ");
+			writeRecipe("shovel", " # ", " * ");
+			writeItemModel("shovel");
 			Global.setTab(this);
 		}
 	}
@@ -135,7 +189,8 @@ public class Group {
 	public class Hoe extends ItemHoe {
 		public Hoe() {
 			super(groupInfo.toolMaterial);
-			wirteSR("hoe", "## ", " * ");
+			writeRecipe("hoe", "## ", " * ");
+			writeItemModel("hoe");
 			Global.setTab(this);
 		}
 	}
